@@ -19,17 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-      - run: git tag -l --points-at ${{ github.sha }}
-      - run: git tag -l --points-at ${{ github.event.after }}
       - run: git for-each-ref "${{ github.ref }}" --format="%(subject)"
-      - run: git for-each-ref "${{ github.ref }}" --format="%(*subject)"
       - run: git for-each-ref "${{ github.ref }}" --format="%(body)"
-      - run: git for-each-ref "${{ github.ref }}" --format="%(*body)"
-      - run: git rev-list --objects -g --no-walk --all
-      - run: git tag -l --points-at ${{ github.sha }} --format="%(subject)"
-      - run: git tag -l --points-at ${{ github.sha }} --format="%(body)"
-      - run: git tag -l --points-at ${{ github.sha }} --format="%(*subject)"
-      - run: git tag -l --points-at ${{ github.sha }} --format="%(*body)"
 
 # github.event.after: refers to the tag itself
 # github.event.forced
