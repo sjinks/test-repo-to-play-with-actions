@@ -44,6 +44,8 @@ jobs:
       - run: git for-each-ref "${{ github.ref }}" --format="%(*subject)"
       - run: git for-each-ref "${{ github.ref }}" --format="%(body)"
       - run: git for-each-ref "${{ github.ref }}" --format="%(*body)"
+      - run: git tag -l --points-at ${{ github.sha }} --format="%(subject)"
+      - run: git tag -l --points-at ${{ github.sha }} --format="%(body)"
 
 # github.event.after: refers to the tag itself
 # github.event.forced
