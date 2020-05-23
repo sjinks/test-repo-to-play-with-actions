@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  create-release:
+  debug:
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
@@ -33,3 +33,17 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+
+  more_debug:
+    runs-on: ubuntu-latest
+    steps:
+      - run: git tag -l --points-at ${{ github.sha }}
+      - run: git tag -l --points-at ${{ github.event.after }}
+      - run: git for-each-ref "${{ github.ref }}" --format="%(subject)"
+      - run: git for-each-ref "${{ github.ref }}" --format="%(*subject)"
+      - run: git for-each-ref "${{ github.ref }}" --format="%(body)"
+      - run: git for-each-ref "${{ github.ref }}" --format="%(*body)"
+
+# github.event.after: refers to the tag itself
+# github.event.forced
+# github.event.created === true
