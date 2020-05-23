@@ -38,6 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - run: git tag -l --points-at ${{ github.sha }}
       - run: git tag -l --points-at ${{ github.event.after }}
       - run: git for-each-ref "${{ github.ref }}" --format="%(subject)"
