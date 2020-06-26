@@ -2,6 +2,7 @@ name: Debug
 
 on:
   push:
+    branches:
     tags:
       - '*'
 
@@ -21,6 +22,9 @@ jobs:
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - run: git for-each-ref "${{ github.ref }}" --format="%(subject)"
       - run: git for-each-ref "${{ github.ref }}" --format="%(body)"
+
+      - run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/*/}
+      - run: echo $RELEASE_VERSION
 
 # github.event.after: refers to the tag itself
 # github.event.forced
