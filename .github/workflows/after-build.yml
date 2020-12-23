@@ -19,6 +19,20 @@ jobs:
 
       - run: env | sort
 
+      - name: Check if tag
+        id: tag
+        run: |
+          version="$(git describe --exact-match --tags "$GITHUB_SHA" 2> /dev/null)"
+          echo "::set-output name=tag::$version"
+
+      - run: |
+          echo This is a tag: ${{ steps.tag.outputs.tag }}
+        if: ${{ steps.tag.outputs.tag }}
+
+      - run: |
+          echo This is not a tag :-(
+        if: ${{ !steps.tag.outputs.tag }}
+
 # event_name: workflow_run
 # event.workflow_run.conclusion: success|failure
 # event.workflow_run.event: push
