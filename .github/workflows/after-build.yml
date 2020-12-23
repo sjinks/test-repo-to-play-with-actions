@@ -6,8 +6,6 @@ on:
       - "Build"
     types:
       - completed
-    tags:
-      - "*"
   workflow_dispatch:
 
 jobs:
