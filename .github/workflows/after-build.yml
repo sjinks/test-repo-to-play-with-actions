@@ -37,9 +37,3 @@ jobs:
       - run: |
           echo "This is not a tag :-("
         if: ${{ !steps.tag.outputs.tag }}
-
-# event_name: workflow_run
-# event.workflow_run.conclusion: success|failure
-# event.workflow_run.event: push
-# event.workflow_run.head_branch: branch or tag name
-# event.workflow_run.head_commit.message: ...
