@@ -1,0 +1,15 @@
+name: Get Status
+on:
+  status
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print github context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - run: env | sort
