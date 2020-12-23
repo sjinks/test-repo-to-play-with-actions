@@ -26,11 +26,11 @@ jobs:
           echo "::set-output name=tag::$version"
 
       - run: |
-          echo This is a tag: ${{ steps.tag.outputs.tag }}
+          echo "This is a tag: ${{ steps.tag.outputs.tag }}"
         if: ${{ steps.tag.outputs.tag }}
 
       - run: |
-          echo This is not a tag :-(
+          echo "This is not a tag :-("
         if: ${{ !steps.tag.outputs.tag }}
 
 # event_name: workflow_run
