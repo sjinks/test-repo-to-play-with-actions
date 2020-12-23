@@ -22,8 +22,9 @@ jobs:
       - name: Check if tag
         id: tag
         run: |
-          version="$(git describe --exact-match --tags "$GITHUB_SHA" 2> /dev/null)" || true
-          echo $version
+          set -x
+          version="$(git describe --exact-match --tags "$GITHUB_SHA")" || true
+          echo $GITHUB_SHA $version
           echo "::set-output name=tag::$version"
 
       - run: |
