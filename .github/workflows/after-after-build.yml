@@ -1,0 +1,14 @@
+name: Trigger yet another build
+
+on:
+  workflow_run:
+    workflows:
+      - "Trigger another build"
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello!"
