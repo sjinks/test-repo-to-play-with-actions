@@ -19,6 +19,9 @@ jobs:
 
       - run: env | sort
 
+      - uses: actions/checkout@v2
+      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
       - name: Check if tag
         id: tag
         run: |

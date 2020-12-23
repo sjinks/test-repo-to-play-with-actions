@@ -3,7 +3,9 @@ name: Debug
 on:
   push:
     branches:
+      - "*"
     tags:
+      - "*"
 
 jobs:
   debug:
