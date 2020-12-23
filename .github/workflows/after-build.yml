@@ -26,7 +26,7 @@ jobs:
         id: tag
         run: |
           set -x
-          version="$(git describe --exact-match --tags "${{ event.workflow_run.head_sha }}")" || true
+          version="$(git describe --exact-match --tags "${{ github.event.workflow_run.head_sha }}")" || true
           echo $GITHUB_SHA $version
           echo "::set-output name=tag::$version"
 
