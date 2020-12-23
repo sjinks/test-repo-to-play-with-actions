@@ -26,7 +26,7 @@ jobs:
         id: tag
         run: |
           set -x
-          version="$(git describe --exact-match --tags "$GITHUB_SHA")" || true
+          version="$(git describe --exact-match --tags "${{ event.workflow_run.head_sha }}")" || true
           echo $GITHUB_SHA $version
           echo "::set-output name=tag::$version"
 
@@ -38,3 +38,8 @@ jobs:
           echo "This is not a tag :-("
         if: ${{ !steps.tag.outputs.tag }}
 
+# event_name: workflow_run
+# event.workflow_run.conclusion: success|failure
+# event.workflow_run.event: push
+# event.workflow_run.head_branch: branch or tag name
+# event.workflow_run.head_commit.message: ...
