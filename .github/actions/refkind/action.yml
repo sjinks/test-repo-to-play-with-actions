@@ -5,7 +5,7 @@ inputs:
     required: true
     description: Reference
 outputs:
-  type:
+  kind:
     description: Reference kind (branch, pr, tag, unknown)
     value: ${{ steps.kind.outputs.kind }}
   name:
