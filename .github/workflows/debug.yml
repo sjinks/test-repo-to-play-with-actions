@@ -40,7 +40,7 @@ jobs:
           ref: ${{ github.ref }}
         id: ref
 
-      - run: echo "${{ steps.ref.outputs.kind }} ${{ steps.ref.outputs.value }}"
+      - run: echo "${{ steps.ref.outputs.kind }} ${{ steps.ref.outputs.name }}"
 
 # github.event.after: refers to the tag itself
 # github.event.forced

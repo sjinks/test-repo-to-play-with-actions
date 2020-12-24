@@ -32,8 +32,9 @@ runs:
           name=""
         fi
 
-        echo "$ref $kind $name"
+        echo "set-output name=kind::${kind}"
+        echo "set-output name=name::${name}"
         echo "::set-output name=kind::${kind}"
-        echo "::set-output name=value::${name}"
+        echo "::set-output name=name::${name}"
       shell: bash
       id: kind
