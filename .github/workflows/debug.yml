@@ -43,7 +43,19 @@ jobs:
 
       - run: echo "${{ steps.ref.outputs.kind }} ${{ steps.ref.outputs.name }}"
 
+  sf:
+    runs-on: ubuntu-latest
+    steps:
+      - run: true
+      - run: echo $OUTCOME
+        env:
+          OUTCOME: ${{ success() && 'SUCCESS' || 'FAILURE' }}
+
+      - run: false
+      - run: echo $OUTCOME
+        env:
+          OUTCOME: ${{ success() && 'SUCCESS' || 'FAILURE' }}
+
 # github.event.after: refers to the tag itself
 # github.event.forced
 # github.event.created === true
-
