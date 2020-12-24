@@ -34,7 +34,7 @@ jobs:
   kind:
     runs-on: ubuntu-latest
     steps:
-      - uses: .github/actions/refkind
+      - uses: ./.github/actions/refkind
         with:
           ref: ${{ github.ref }}
         id: ref
