@@ -9,7 +9,7 @@ outputs:
     description: Reference kind (branch, pr, tag, unknown)
     value: ${{ steps.kind.outputs.kind }}
   name:
-    description: Name (branch or tag name, PR nymber)
+    description: Name (branch or tag name, PR number)
     value: ${{ steps.kind.outputs.name }}
 runs:
   using: composite
@@ -32,7 +32,8 @@ runs:
           name=""
         fi
 
-        echo ::set-output name=kind::$kind
-        echo ::set-output name=value::$name
+        echo "$ref $kind $name"
+        echo "::set-output name=kind::$kind"
+        echo "::set-output name=value::$name"
       shell: bash
       id: kind
