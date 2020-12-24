@@ -1,5 +1,5 @@
 name: Determine Reference Kind
-description: Determines reference kind
+description: Determines the kind of a git reference
 inputs:
   ref:
     required: true
@@ -14,7 +14,10 @@ outputs:
 runs:
   using: composite
   steps:
-    - run: |
+    - name: Determine reference kind
+      id: kind
+      shell: bash
+      run: |
         ref="${{ inputs.ref }}"
 
         if [[ "$ref" == refs/tags/* ]]; then
@@ -32,9 +35,5 @@ runs:
           name=""
         fi
 
-        echo "set-output name=kind::${kind}"
-        echo "set-output name=name::${name}"
         echo "::set-output name=kind::${kind}"
         echo "::set-output name=name::${name}"
-      shell: bash
-      id: kind
