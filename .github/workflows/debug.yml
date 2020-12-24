@@ -34,9 +34,10 @@ jobs:
   kind:
     runs-on: ubuntu-latest
     steps:
-      - uses: .github/actions/refkind
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/refkind
         with:
           ref: ${{ github.ref }}
         id: ref
 
-      - run: echo "${{ steps.ref.outputs.kind }} ${{ steps.ref.outputs.value }}"
+      - run: echo "${{ steps.ref.outputs.kind }} ${{ steps.ref.outputs.name }}"
