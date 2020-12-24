@@ -26,7 +26,7 @@ runs:
         elif [[ "$ref" == refs/pull/* ]]; then
           kind=pr
           name=${ref#refs/pull/}
-          name=${ref%/*}
+          name=${name%/*}
         else
           kind=unknown
           name=""
