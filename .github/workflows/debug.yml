@@ -30,3 +30,13 @@ jobs:
 
       - run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - run: echo $RELEASE_VERSION
+
+  kind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: .github/actions/refkind
+        with:
+          ref: ${{ github.ref }}
+        id: ref
+
+      - run: echo "${{ steps.ref.outputs.kind }} ${{ steps.ref.outputs.value }}"
