@@ -12,7 +12,6 @@ on:
 jobs:
   debug:
     runs-on: ubuntu-latest
-    if: false
     steps:
       - run: env
       - name: Dump GitHub context
