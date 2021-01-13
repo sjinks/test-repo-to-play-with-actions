@@ -9,7 +9,7 @@ on:
     - '**:**'
 
 jobs:
-  runs:
+  hello:
     runs-on: ubuntu-latest
     steps:
     - run: echo Hello
