@@ -12,7 +12,8 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     outputs:
-      foreign_pr: ${{ steps.fp.outputs.foreign_pr }}    steps:
+      foreign_pr: ${{ steps.fp.outputs.foreign_pr }}
+    steps:
     - run: |
         if [ "${{ github.event_name }}" == "pull_request" ] && [ "${{ github.event.pull_request.head.repo.owner.login }}" != "${{ github.event.pull_request.base.repo.owner.login }}" ]; then
           echo "::set-output name=foreign_pr::1"
