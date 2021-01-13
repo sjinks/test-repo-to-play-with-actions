@@ -36,6 +36,7 @@ jobs:
           fi
           echo "FPR: ${fpr}"
           echo "TAG: ${tag}"
+          echo "${{ github.event_name }}"
           echo "::set-output name=foreign_pr::${fpr}"
           echo "::set-output name=head_tag::${tag}"
 
