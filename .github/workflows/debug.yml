@@ -12,6 +12,7 @@ on:
 jobs:
   debug:
     runs-on: ubuntu-latest
+    if: false
     steps:
       - run: env
       - name: Dump GitHub context
@@ -21,6 +22,7 @@ jobs:
 
   more_debug:
     runs-on: ubuntu-latest
+    if: false
     steps:
       - uses: actions/checkout@v2
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
@@ -36,6 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: git tag --points-at HEAD
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - run: git tag --points-at HEAD
 
