@@ -40,7 +40,3 @@ jobs:
       - run: git tag --points-at HEAD
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - run: git tag --points-at HEAD
-
-# github.event.after: refers to the tag itself
-# github.event.forced
-# github.event.created === true
