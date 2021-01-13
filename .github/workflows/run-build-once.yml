@@ -1,4 +1,4 @@
-name: Run workflow once
+name: Run build job once
 
 on:
   push:
@@ -27,10 +27,10 @@ jobs:
       - name: Set output variables
         id: check
         run: |
-          if [[ "$ref" == refs/heads/* ]]; then
+          if [[ "${{ github.ref }}" == refs/heads/* ]]; then
             echo "::set-output name=head_tag::$(git tag --points-at HEAD)"
             echo "::set-output name=foreign_pr::no"
-          elif [[ "$ref" == refs/pull/* ]]; then
+          elif [[ "${{ github.ref }}" == refs/pull/* ]]; then
             echo "::set-output name=head_tag::"
             if [ "${{ github.event.pull_request.head.repo.full_name }}" != "${{ github.event.pull_request.base.repo.full_name }}" ]; then
               echo "::set-output name=foreign_pr::yes"
