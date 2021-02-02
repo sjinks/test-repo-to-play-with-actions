@@ -25,3 +25,8 @@ jobs:
 # github.event.after: refers to the tag itself
 # github.event.forced
 # github.event.created === true
+
+  xxx:
+    runs-on: ubuntu-latest
+    steps:
+      - run: git clone git@github.com:workivate/cloudops-module-s3-bucket.git
