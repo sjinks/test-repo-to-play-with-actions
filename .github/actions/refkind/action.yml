@@ -1,0 +1,39 @@
+name: Determine Reference Kind
+description: Determines the kind of a git reference
+inputs:
+  ref:
+    required: true
+    description: Reference
+outputs:
+  kind:
+    description: Reference kind (branch, pr, tag, unknown)
+    value: ${{ steps.kind.outputs.kind }}
+  name:
+    description: Name (branch or tag name, PR number)
+    value: ${{ steps.kind.outputs.name }}
+runs:
+  using: composite
+  steps:
+    - name: Determine reference kind
+      id: kind
+      shell: bash
+      run: |
+        ref="${{ inputs.ref }}"
+
+        if [[ "$ref" == refs/tags/* ]]; then
+          kind=tag
+          name=${ref#refs/tags/}
+        elif [[ "$ref" == refs/heads/* ]]; then
+          kind=branch
+          name=${ref#refs/heads/}
+        elif [[ "$ref" == refs/pull/* ]]; then
+          kind=pr
+          name=${ref#refs/pull/}
+          name=${name%/*}
+        else
+          kind=unknown
+          name=""
+        fi
+
+        echo "::set-output name=kind::${kind}"
+        echo "::set-output name=name::${name}"

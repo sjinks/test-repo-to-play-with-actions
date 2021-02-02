@@ -2,13 +2,18 @@ name: Debug
 
 on:
   push:
+    branches:
+      - "*"
     tags:
-      - '*'
+      - "*"
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   debug:
     runs-on: ubuntu-latest
     steps:
+      - run: env
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -16,11 +21,25 @@ jobs:
 
   more_debug:
     runs-on: ubuntu-latest
+    if: false
     steps:
       - uses: actions/checkout@v2
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - run: git for-each-ref "${{ github.ref }}" --format="%(subject)"
       - run: git for-each-ref "${{ github.ref }}" --format="%(body)"
+      - run: git for-each-ref "${{ github.ref }}" --format="%(contents:subject)"
+      - run: git for-each-ref "${{ github.ref }}" --format="%(contents:body)"
+
+      - run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - run: echo $RELEASE_VERSION
+
+  tags:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: git tag --points-at HEAD
+      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+      - run: git tag --points-at HEAD
 
 # github.event.after: refers to the tag itself
 # github.event.forced
