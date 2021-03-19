@@ -43,3 +43,13 @@ jobs:
 # github.event.after: refers to the tag itself
 # github.event.forced
 # github.event.created === true
+
+  outcomes:
+    runs-on: ubuntu-latest
+    steps:
+      - run: true
+      - run: false
+      - run: true
+      - run: false
+        if: always()
+        continue-on-error: true
