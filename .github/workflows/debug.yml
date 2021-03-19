@@ -21,7 +21,6 @@ jobs:
 
   more_debug:
     runs-on: ubuntu-latest
-    if: false
     steps:
       - uses: actions/checkout@v2
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
@@ -44,14 +43,3 @@ jobs:
 # github.event.after: refers to the tag itself
 # github.event.forced
 # github.event.created === true
-
-  xxx:
-    runs-on: ubuntu-latest
-    steps:
-      - run: mkdir -p ~/.ssh
-      - run: echo "$PRIVATE_KEY" > ~/.ssh/id_ed25519
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-      - run: chmod 0600 ~/.ssh/id_ed25519
-      - run: echo -e "Host github.com\n\tHostName github.com\n\tPreferredAuthentications publickey\n\tIdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
-      - run: git clone git@github.com:workivate/cloudops-module-s3-bucket.git
