@@ -8,6 +8,9 @@ jobs:
   php:
     runs-on: ubuntu-latest
     steps:
+      - run: ls -lha /usr/bin
+      - run: dpkg -l
+
       - uses: shivammathur/setup-php@2.18.1
         with:
           coverage: none
