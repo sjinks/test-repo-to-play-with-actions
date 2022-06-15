@@ -8,8 +8,7 @@ jobs:
   php:
     runs-on: ubuntu-latest
     steps:
-      - run: ls -lha /usr/bin
-      - run: dpkg -l
+      - run: dpkg -l | awk '/php7\.4/ {print $2}' | xargs -I {} sudo apt-get purge -yy {}
 
       - uses: shivammathur/setup-php@2.18.1
         with:
