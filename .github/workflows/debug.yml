@@ -44,12 +44,20 @@ jobs:
 # github.event.forced
 # github.event.created === true
 
-  outcomes:
+
+  runtime:
     runs-on: ubuntu-latest
     steps:
-      - run: true
-      - run: false
-      - run: true
-      - run: false
-        if: always()
-        continue-on-error: true
+      - name: Expose runtime
+        uses: actions/github-script@v7
+        with:
+          script: |
+            Object.keys(process.env).forEach((key) => {
+              if (key.startsWith('ACTION_')) {
+                core.info(`key=${process.env[key]}`);
+              }
+            });
+
+            core.info('GITHUB_RUN_ID=' + github.run_id);
+            core.info('GITHUB_RETENTION_DAYS=' + github.retention_days);
+            core.info('GITHUB_SERVER_URL=' + github.server_url);
