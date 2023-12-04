@@ -52,6 +52,8 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            console.log(github);
+            console.log(process.env);
             Object.keys(process.env).forEach((key) => {
               if (key.startsWith('ACTION_')) {
                 core.info(`key=${process.env[key]}`);
